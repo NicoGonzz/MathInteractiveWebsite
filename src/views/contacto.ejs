@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <!-- Metadatos-->
+    <meta charset="utf-8">
+    <meta name="Author" content="Juan Nicolas Gonzalez Marin">
+    <meta name="Descripcion" content="Portafolio Juan Nicolas Gonzalez">
+    <meta name="Keywords" content="HTML,CSS,Javascript,React,Bootstrap">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+     <!-- Icono Pestaña -->
+     <link rel="icon" type="image/x-icon" href="img/mathlogo.jpg">
+    <!-- Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fonts Google-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <!-- APIS-->
+    <!-- Lectura del CSS-->
+    <link rel="stylesheet" href="/contact.css">
+     <!-- Titulo-->
+     <title><%= title%></title> 
+  </head>
+<body>
+    <%- include('partials/navigation') %>
+    <div class="container-form">
+        <div class="info-form">
+        <h2>Contactanos</h2>
+        <p>Para nuestra pagina interactiva es muy importante saber tu opinion por eso te dejamos los siguientes canales de comunicacion , 
+          ademas adicionamos un buzon de sugerencias/inquietudes que estara disponible las 24 horas del dia con el fin de mejorar dia a dia.</p>
+        <a href="" <i=class"numero-tel">
+          </i=>300-605-3457</a>
+        <c href="" <i=class"cuidad"></i> 
+          </i=>Bogota</c>
+     </div>
+      <form action="#" autocomplete="off">
+        <input type="text" name="nombre"
+        placeholder="Ingresa tu Nombre"
+        class="camponombre">
+        <input type="email" name="correo"
+        placeholder="Ingresa tu correo"
+        class="campocorreo">
+        <textarea name="AreaTexto" placeholder="Ingresa en esta parte tu sugerencia/inquietud "id="" cols="30" rows="10"></textarea>
+        <input type="submit" name="enviar"
+        value="Enviar" class="btn-enviar">
+      </form> 
+    </div>
+    <!--Hacemos al formulario Funcional-->
+    <script>
+        const $form = document.querySelector('#form')
+        
+        $form.addEventListener('submit',handleSubmit)
+
+        function handleSubmit(event){
+          // creamos una funcion que no recarge la pagina al enviar el formulario
+          event.preventDefault()
+          const form =new FormData(this)
+          //trae el nombre del usuario
+          console.log('Su sugerencia ha sido enviada correctamente')
+          //console.log(form.get('nombre'))
+
+        }
+    </script>
+</body>
+</html>

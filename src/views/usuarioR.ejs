@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <!-- Metadatos-->
+    <meta charset="utf-8">
+    <meta name="Author" content="Juan Nicolas Gonzalez Marin">
+    <meta name="Descripcion" content="Portafolio Juan Nicolas Gonzalez">
+    <meta name="Keywords" content="HTML,CSS,Javascript,React,Bootstrap">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+     <!-- Icono Pestaña -->
+    <link rel="icon" type="image/x-icon" href="img/mathlogo.jpg">
+    <!-- Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fonts Google-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <!-- APIS-->
+    <!-- Lectura del CSS-->
+    <link rel="stylesheet" href="/usuarioR.css">
+     <!-- Titulo-->
+  </head>
+<body>
+    <%- include('partials/navigationGame') %>
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="tablero">
+              <div class="area-tarjeta">
+                <div class="tarjeta">
+                    <div class="cara trasera">
+                      <i class="bi bi-dice-6-fill"></i>
+                    </div>
+                     <div class="cara superior">
+                      <i class="bi bi-question-square-fill"></i>
+                     </div>
+                 </div>
+              </div>
+        </div>
+        <br>
+        <div class="nuevoJuego" onclick="generarTablero()">Nuevo Juego</div>
+
+        <!-- Javascript-->
+        <script>
+            let iconos
+
+            generarTablero()
+
+            function cargarIconos() {
+              iconos =[
+                '34+37=71',
+                '27+28=55',
+                '5*1=6',
+                '9-14=-7',
+                '1-3=2',
+                '29-7=21',
+                '12-4=9',
+                '90-1=91',
+                '3*4=16',
+                '2*3=8',
+                '5+4=11',
+                '8+2=13',
+                '4-2=1',
+                '24-13=10',
+                '5*5=24',
+                '-5*5=25',
+                '-2*-2=-4',
+                '22-22=1',
+                '8-18=8',
+                '89-14=60',
+                '12+28=50',
+                '6*6=38',
+                '9*8=63',
+                '10*7=17'
+              ]
+              
+            }
+            function generarTablero(){
+              let selecciones = []
+              cargarIconos()
+              let tablero = document.getElementById("tablero")
+              let tarjetas =[]
+                for(let i=0; i< 24; i++){
+                  tarjetas.push(
+                    `<div class="area-tarjeta" onclick="seleccionarTarjeta(${i})">
+                <div class="tarjeta" id="tarjeta${i}">
+                    <div class="cara trasera" id="trasera${i}"> 
+                      ${iconos[0]}
+                    </div>
+                     <div class="cara superior">
+                      <i class="bi bi-question-square-fill"></i>
+                     </div>
+                 </div>
+              </div>`
+                  )
+                    iconos.splice(0,1)
+                }
+                tarjetas.sort(()=>Math.random() -0.5)
+                tablero.innerHTML = tarjetas.join(" ")
+            }
+
+            let selecciones =[]
+
+            function seleccionarTarjeta(i){
+              let tarjeta = document.getElementById("tarjeta"+i);
+              if(tarjeta.style.transform != "rotateY(180deg)"){
+                tarjeta.style.transform = "rotateY(180deg)"
+                selecciones.push(i)
+                console.log('No funciono')
+              } 
+              if(selecciones.length == 2){
+                  deseleccionar(selecciones)
+                  selecciones = []
+              }
+            }
+            
+            function deseleccionar(selecciones){
+                setTimeout(() => {
+                    console.log("FUNCIONA")
+                    let trasera1 = document.getElementById("trasera"+selecciones[0])
+                    let trasera2 = document.getElementById("trasera"+selecciones[1])
+                    if( trasera0 != trasera1 ) {
+                      let tarjeta1 =document.getElementById("tarjeta"+selecciones[0])
+                      let tarjeta2 =document.getElementById("tarjeta"+selecciones[1])
+                      tarjeta1.style.transform = "rotateY(0deg)"
+                      tarjeta2.style.transform = "rotateY(0deg)"
+                    }else{
+                      trasera1.style.background = "plum"
+                      trasera2.style.background = "plum"
+                    }
+                },1000);
+               // || (trasera3 == trasera15) || (trasera4 == trasera16) || (trasera5 == trasera17) || (trasera6 ==trasera18) || (trasera7 == trasera19) || (trasera8 ==trasera20 ) || (trasera9 ==trasera21 ) || (trasera10 == trasera22) || (trasera11 == trasera23) )
+            }
+        </script>
+    </body>
+    </html>
+</body>
+</html>

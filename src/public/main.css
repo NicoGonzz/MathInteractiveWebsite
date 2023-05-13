@@ -1,0 +1,196 @@
+/* Barra Navegacion */
+
+.navbar{
+    padding: 1rem;
+    background-color: #0d6efd;
+    justify-content: space-between;
+}
+.navbar-collapse {
+ align-items: center;
+ justify-content: space-between;
+}
+.nav-link{
+    color :black;
+}
+/*Estilos*/
+section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.seccion-titulo{
+    font-size: 2rem;
+    padding: 15px 0;
+    font-family: 'Permanent Marker', cursive;
+}
+.seccion-descripcion{
+    font-size: 1.2rem;
+    color: red;
+}
+h1{
+    font-size: 1.5rem;
+    font-family: 'Permanent Marker', cursive;
+    color:#f5f6f7;
+}
+/*Estilos Login*/
+:root{
+    --white:#FFFFFF;
+    --black: #000000;
+    --very-light-pink: #C7C7C7;
+    --text-input-field:#F7F7F7;
+    --hospital-green: #ACD9B2;
+    --sm: 14px;
+    --md: 16px;
+    --lg: 18px;
+ }
+body{
+    font-family: 'Quicksand', sans-serif;
+    margin:0; /*Se quita la margen */
+    background-image: url(./img/FondoColorPastel.jpg);
+    background-size: cover;
+}
+.login{
+    width: 100%;
+    display: flex; /*añadimos una propiedad que pone los items en el center usando grid, centra todo el contenido vertical y horizontalmente*/
+    justify-content: space-between;
+}
+.form-container{
+    display: grid;
+    grid-template-rows: auto 1fr auto;/*Las filas tomen el tamaño de 1fr 1 fraccion*/
+    width: 470px;
+    place-items: left;
+    margin-left: 125px;
+    margin-top: 45px;
+    margin-bottom: 35px;
+}
+.game{
+    padding: 20px;
+    place-items: center;
+    margin-right: 155px;
+    margin-bottom: 25px;
+    display: flex;
+}
+.game figure{
+    position: relative;
+    height: 350px;
+    width: 800px;
+    overflow: hidden;
+    border-radius: 6px;
+    box-shadow:  0px 15px 25px;
+    cursor: pointer;
+}
+.game figure img{
+    width: 100%;
+    height: 100%;
+    transition: all 500ms ease-out;
+}
+.game figure .gameWrite{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 103, 123,0.7);
+    transition: all 500ms ease-out;
+    opacity: 0;
+    visibility: hidden;
+    text-align: center;
+}
+.game figure:hover > .gameWrite {
+    opacity: 1;
+    visibility: visible;
+}
+.game figure:hover > .gameWrite h3{
+    margin-top: 70px;
+    margin-bottom: 15px;
+}
+.game figure .gameWrite h3{
+    color: #7ade30;
+    font-weight: 400;
+    margin-bottom: 120px;
+    transition: all 500ms ease-out;
+    margin-top: 30px;
+}
+.game figure .gameWrite p{
+    color: bisque;
+    font-size: 15px;
+    line-height: 1.5;
+    width: 100%;
+    max-width: 220px;
+    margin: auto;
+}
+.form{
+    display: flex; /*Pone uno sobre el otro*/
+    flex-direction: column; /*Se ponen al lado*/
+    border: 2px solid #8080804d;
+    border-radius: 10%;
+}
+.form a{    /*Olvide Contraseña*/
+    color: black;  
+    font-size: var(--sm);
+    text-align: center;
+    text-decoration: none;
+    margin-bottom: 52px;
+}
+
+
+/*Funciones*/
+
+.experiencia{
+   /* padding:40px 40px 60px 40px;*/
+    color:black;
+    background-color: white;
+        background-image: url(./img/FondoColorPastel.jpg);
+    background-size: cover;
+}
+.experiencia .columna {
+    padding: 20px;
+    border: 2px solid #8080804d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    transition: all 0.2s ease-in;
+}
+.experiencia .columna:hover {
+    color: white;
+    background-color: #1b1b32;
+}
+.experiencia i{
+    font-size: 2.5rem;
+    color: #7ade30;
+    background-color: #000008;
+    padding: 8px 19px;
+    border-radius: 50%;
+}
+.experiencia-titulo {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.badges-contenedor{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.badge{
+    margin: 3px;
+}
+/* Reglas */
+.reglasClass{
+    border-radius: 2px;
+    border-color: #7ade30;
+}
+
+/* Responsive */
+@media screen and (max-widht: 767px){
+    .navbar-brand{
+        display: none;
+    }
+    .logo{
+        display: block;
+    }
+    .secondary-button{
+        margin-top: 70px;
+    }
+}
