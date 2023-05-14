@@ -53,4 +53,4 @@ jobs:
           app-name: 'MathPrimaryInteractiveWebsite'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7A948E95D0164A2ABAC2923697E8615E }}
-          package: .
+          package: ./
