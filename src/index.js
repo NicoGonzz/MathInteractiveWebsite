@@ -1,7 +1,7 @@
 import express from 'express'
 import {dirname, join} from 'path'
 import {fileURLToPath } from 'url'
-import bodyParser from 'body-parser';
+import bodyParser from 'body-parser'
 import indexRoutes from './routes/index.js'
 // Conexion back-base datos
 import myconnection from 'express-myconnection';
@@ -53,22 +53,6 @@ app.use((req, res, next) => {
       return;
     }
     console.log('Conexión a la base de datos establecida');
-  });
-app.post('/agregar', (req, res) => {
-    const nombre = req.body.name;
-    const apellido = req.body.apellido;
-    const email = req.body.email;
-    const contrasena = req.body.password;
-  
-    // Consulta SQL para insertar un nuevo registro
-    const sql = 'INSERT INTO registro (name, apellido, email, password) VALUES (?, ?, ?, ?)';
-    connection.query(sql, [nombre, apellido, email, contrasena], (err, result) => {
-      if (err) {
-        throw err;
-      }
-      console.log('Nuevo registro agregado a la base de datos');
-      res.send('Registro agregado exitosamente');
-    });
   });
   
 app.use((req, res, next) => {

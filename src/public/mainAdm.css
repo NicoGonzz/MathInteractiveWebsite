@@ -1,0 +1,73 @@
+.navbar{
+    padding: 1rem;
+    background-color: black;
+    justify-content: space-between;
+}
+.navbar-collapse {
+ align-items: center;
+ justify-content: space-between;
+}
+.nav-link{
+    color :white;
+    font-weight: bold;
+}
+
+/*Estilos tabla */
+/* Estilos para el encabezado h1 */
+h1 {
+    text-align: left;
+  }
+  
+  /* Tabla general*/
+  table {
+    border-collapse: collapse;
+    width: 30%;
+  }
+  
+  /* Encabezado */
+  th {
+    text-align: left;
+    padding: 8px;
+    background-color: #f2f2f2;
+  }
+  
+  /* Celdas */
+  td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Filas*/
+  tr:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  p{
+    margin-left: 8px;
+    font-size: 18px;
+  }
+  p.total-registros {
+    font-size: 21px;
+    margin-top: 2px;
+    margin-left: 8px;
+  }
+  p.moda{
+    font-size: 21px;
+  }
+  /* Grafica*/
+  p.ContraseñaCombinatoria{
+    font-size: 21px;
+    display: inline;
+  }
+  .graficaCorreos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    height: 400px;
+    margin-left: 50px;
+
+  }
+  
+
+ 

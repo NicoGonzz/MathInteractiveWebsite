@@ -1,7 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import bcrypt, { hash } from 'bcrypt';
+import bcrypt, { hash, compare } from 'bcrypt';
 import mysql from 'mysql'; 
+import {Chart} from 'chart.js';
 
 
 
@@ -22,22 +23,80 @@ function login(req,res){
     console.log('Si entro al metodo login')
 }
 
-function auth(req,res){  //verifica la contra y la sesion
-  const data = req.body;
-  getConnection((err, conn) =>{
-    console.log(data.email);
-    const email= data.email;
-    conn.query('SELECT * FROM registro WHERE email = ?', [data.email], (err,userdata) => {  
-      if(userdata.lenght > 0){
-          console.log('Hello')
-          res.redirect('/reglasGame') 
-      }else{
-          console.log('El usuario no existe');
-          res.render('login.ejs', { error: 'El usuario no existe' });
-      }
-    });
-  });
+async function comparePasswords(password, hashedPassword) {
+  try {
+    const match = await bcrypt.compare(password, hashedPassword);
+    return match;
+  } catch (error) {
+    throw new Error('Error al comparar las contraseñas.');
+  }
 }
+
+async function auth(req, res) {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  
+  const emailQuery = 'SELECT COUNT(*) AS count FROM registro WHERE email = ?';
+  const passwordQuery = 'SELECT password FROM registro WHERE email = ?';
+
+  try {
+    const emailResults = await new Promise((resolve, reject) => {
+      connection.query(emailQuery, [email], (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+
+    const count = emailResults[0].count;
+    const emailExists = count > 0;
+
+    if (emailExists) {
+      const passwordResults = await new Promise((resolve, reject) => {
+        connection.query(passwordQuery, [email], (error, results) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(results);
+          }
+        });
+      });
+
+      const hashedPassword = passwordResults[0].password;
+      const passwordMatch = await bcrypt.compare(password, hashedPassword);
+
+      if (passwordMatch) {
+        console.log('El correo y la contraseña coinciden.');
+
+        if (email === 'NicolasAdmin@hotmail.com' && password === '1234') {
+          // Si el correo y la contraseña coinciden con el administrador
+          res.redirect('/administrador');
+        } else {
+          // Si el correo y la contraseña coinciden, pero no son del administrador
+          res.redirect('/reglasGame');
+        }
+      } else {
+        console.log('La contraseña no coincide.');
+        const mensaje = 'La contraseña no coincide, ingrésala nuevamente.';
+        res.render('login', { error: mensaje });
+      }
+    } else {
+      console.log('El correo no existe en la base de datos.');
+      const mensaje = 'El correo no corresponde, por favor ingrésalo nuevamente.';
+      res.render('login', { error: mensaje });
+    }
+  } catch (error) {
+    console.error(`Error al ejecutar la consulta: ${error}`);
+    res.status(500).json({ error: 'Error en el servidor.' });
+  }
+}
+
+
+
+
 
 function register(req,res){
     res.render('views/usuarioNR');
@@ -77,35 +136,12 @@ function storeUser(req,res){
     });
   }
 
+
 // Agregar el middleware de análisis del cuerpo (body-parser)
 router.use(jsonParser);
 //Nos muestra los datos escritos en el registro
 
 
-
-
-/*function agregarRegistro(req, res, connection) {
-  const name = req.body.name;
-  const apellido = req.body.apellido;
-  const email = req.body.email;
-  const password = req.body.password;
-
-  // Consulta SQL para insertar un nuevo registro
-  const sql = 'INSERT INTO registro (name, apellido, email, password) VALUES (?, ?, ?, ?)';
-  connection.query(sql, [name, apellido, email, password], (err, result) => {
-    if (err) {
-      throw err;
-    }
-    console.log('Nuevo registro agregado a la base de datos');
-    res.send('Registro agregado exitosamente');
-  });
-}
-/*function resUsuario(req, res){
-    const data = req.body;
-    console.log(data);
-    console.log('funciona');
-    res.redirect('/');
-}*/
 
 
  export default{

@@ -35,13 +35,39 @@ router.get('/contacto', (req, res) => res.render('contacto.ejs',{title: 'Contact
 
 router.get('/reglasGame', (req, res) => res.render('reglasGame.ejs',{title: 'ReglasJuego'}))
 
+router.get('/administrador', (req, res) => {
+  const query = 'SELECT * FROM registro';
+
+  connection.query(query, (error, results) => {
+    if (error) {
+      console.error(`Error al obtener los datos de la base de datos: ${error}`);
+      res.status(500).json({ error: 'Error en el servidor.' });
+    } else {
+      const totalRegistros = results.length;      //Cantidad de datos
+
+
+      res.render('administrador', { datos: results, totalRegistros});
+    }
+  });
+});
+
+
+
+/*let totalIngresos = 0;                // Ingresos a la pagina Web
+      for (const registro of results) {       //NO IMPLEMENTADA
+        totalIngresos += registro.num_ingresos;
+      }*/
 //Obtenemos datos base datos
 
 router.get('/login',LoginControl.login);
 router.get('/usuarioNR',LoginControl.register);
+//router.get('/administrador',LoginControl.graficaFrecuenciaCorreos);
 router.post('/login',LoginControl.auth);
 router.post('/usuarioNR',LoginControl.storeUser);
 
 //router.post('/usuarioNR',LoginControl.agregarRegistro);
 
-export default router
+//Funciones Moda
+
+
+export default router 
